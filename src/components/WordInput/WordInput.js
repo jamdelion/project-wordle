@@ -1,12 +1,17 @@
 import React from "react";
 
-function WordInput({ userAnswer, setUserAnswer }) {
+function WordInput({ guesses, setGuesses, setUserAnswer }) {
   const [guess, setGuess] = React.useState("");
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setUserAnswer(guess);
-    console.log("Guessed word: ", guess);
+    const newGuess = {
+      word: guess,
+      id: Math.random(),
+    };
+    setUserAnswer(newGuess.word);
+    setGuesses([...guesses, newGuess]);
+    console.log("Guessed word: ", newGuess.word);
     setGuess("");
   };
 
@@ -17,7 +22,7 @@ function WordInput({ userAnswer, setUserAnswer }) {
         id="guess-input"
         type="text"
         value={guess}
-        pattern=".{5}" 
+        pattern=".{5}"
         onChange={(event) => {
           setGuess(event.target.value.toUpperCase());
         }}
