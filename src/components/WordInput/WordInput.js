@@ -2,7 +2,14 @@ import React from "react";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import { checkGuess } from "../../game-helpers";
 
-function WordInput({ guesses, setGuesses, setUserAnswer, answer }) {
+function WordInput({
+  guesses,
+  setGuesses,
+  setUserAnswer,
+  answer,
+  setGameOver,
+  gameOver
+}) {
   const [guess, setGuess] = React.useState("");
 
   const handleFormSubmit = (event) => {
@@ -12,12 +19,14 @@ function WordInput({ guesses, setGuesses, setUserAnswer, answer }) {
       id: Math.random(),
       result: checkGuess(guess, answer),
     };
-    if (guesses.length >= NUM_OF_GUESSES_ALLOWED) {
+    setUserAnswer(newGuess.word);
+    const newGuesses = [...guesses, newGuess];
+    setGuesses(newGuesses);
+    setGuess("");
+    if (newGuesses.length >= NUM_OF_GUESSES_ALLOWED || guess === answer) {
+      setGameOver(true);
       return;
     }
-    setUserAnswer(newGuess.word);
-    setGuesses([...guesses, newGuess]);
-    setGuess("");
   };
 
   return (
@@ -28,6 +37,7 @@ function WordInput({ guesses, setGuesses, setUserAnswer, answer }) {
         type="text"
         value={guess}
         pattern=".{5}"
+        disabled={gameOver}
         onChange={(event) => {
           setGuess(event.target.value.toUpperCase());
         }}
