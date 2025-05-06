@@ -1,7 +1,8 @@
 import React from "react";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { checkGuess } from "../../game-helpers";
 
-function WordInput({ guesses, setGuesses, setUserAnswer }) {
+function WordInput({ guesses, setGuesses, setUserAnswer, answer }) {
   const [guess, setGuess] = React.useState("");
 
   const handleFormSubmit = (event) => {
@@ -9,6 +10,7 @@ function WordInput({ guesses, setGuesses, setUserAnswer }) {
     const newGuess = {
       word: guess,
       id: Math.random(),
+      result: checkGuess(guess, answer),
     };
     if (guesses.length >= NUM_OF_GUESSES_ALLOWED) {
       return;

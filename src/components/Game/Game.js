@@ -21,6 +21,7 @@ function Game() {
         setUserAnswer={setLatestUserAnswer}
         setGuesses={setGuesses}
         guesses={guesses}
+        answer={answer}
       />
     </>
   );
