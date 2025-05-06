@@ -2,6 +2,13 @@
 
 ## Joy of React, Project I
 
+> [!NOTE]
+> **Suggested improvements from the course solution code:**
+> 
+> - Use `title` in the `WordInput` so that the validation message is customised, e.g. '5 letter word required'. You can also use `minLength`, `maxLength` and `required` input attributes.
+> - The `handleFormSubmit` logic could have been defined in the `Game` file and passed down to `WordInput`, rather than passing all the state down to it.
+> - Consider creating a generic Banner and then separate Banner components for winning and losing. This way you pass the minimum necessary props instead of some that aren't used in half the cases.
+
 In this project, we'll recreate a popular online word game, Wordle:
 
 ![Demo showing the finished product, our Wordle clone](docs/wordle-demo.gif)
