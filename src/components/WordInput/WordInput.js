@@ -1,4 +1,5 @@
 import React from "react";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 function WordInput({ guesses, setGuesses, setUserAnswer }) {
   const [guess, setGuess] = React.useState("");
@@ -9,9 +10,11 @@ function WordInput({ guesses, setGuesses, setUserAnswer }) {
       word: guess,
       id: Math.random(),
     };
+    if (guesses.length >= NUM_OF_GUESSES_ALLOWED) {
+      return;
+    }
     setUserAnswer(newGuess.word);
     setGuesses([...guesses, newGuess]);
-    console.log("Guessed word: ", newGuess.word);
     setGuess("");
   };
 
